@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header,
+footer {
+  background-color: #272635;
+  color: #e8e9f3;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+  background-color: #cecece;
+}
+
+.calc-container {
+  border: 20px solid #272635;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  min-width: 200px;
+  min-height: 500px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-display {
+  user-select: none !important;
+  min-height: 90px;
+  border: 2px solid #272635;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding-top: 10px;
+  padding-right: 2px;
+  gap: 10px;
+}
+
+.calc-display p {
+  text-align: end;
+}
+
+.calc-display p:first-child {
+  font-size: 1em;
+  color: rgb(94, 93, 93);
+}
+.calc-display p:last-child {
+  font-size: 2em;
+}
+
+.button-wrapper {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.6fr;
+  grid-template-rows: auto;
+}
+
+.button-wrapper * {
+  user-select: none;
+  border: none;
+  padding: 10px;
+  margin: 2px;
+  font-weight: 700;
+  font-size: 2em;
+  background-color: #a6a6a8;
+}
+
+button img:hover,
+button:hover {
+  border: none;
+  background-color: #b1e5f2;
+}
+button:active {
+  transform: translateY(2px);
+}
+
+#btnBS {
+  background: no-repeat center/25% url("./img/delete-left-solid.svg");
+  background-color: #a6a6a8;
+}
+
+#btnAdd {
+  grid-column: 4;
+  grid-row: 2/4;
+}
+#btnEqual {
+  grid-column: 4;
+  grid-row: 4/6;
+}
