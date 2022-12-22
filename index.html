@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
     <title>Calculator</title>
   </head>
   <body>
@@ -13,9 +14,12 @@
     </header>
     <main>
       <div class="calc-container">
-        <p class="calc-display"></p>
+        <div class="calc-display">
+          <p></p>
+          <p></p>
+        </div>
         <div class="button-wrapper">
-          <button id="clear" class="other">C</button>
+          <button id="btnClear" class="other">C</button>
           <button id="btnDivide" class="operator">/</button>
           <button id="btnMultiply" class="operator">*</button>
           <button id="btnSubtract" class="operator">-</button>
@@ -26,18 +30,16 @@
           <button class="digit">4</button>
           <button class="digit">5</button>
           <button class="digit">6</button>
-          <button id="btnBS" class="other">
-            <img src="./img/delete-left-solid.svg" width="20px" alt="" />
-          </button>
           <button class="digit">1</button>
           <button class="digit">2</button>
           <button class="digit">3</button>
-          <button id="btnEqual" class="operator">=</button>
+          <button id="btnEqual">=</button>
           <button class="digit">0</button>
           <button id="btnDec" class="other">.</button>
+          <button id="btnBS" class="other"></button>
         </div>
       </div>
     </main>
-    <footer>Copyright &copy; Marife Dela Torre</footer>
+    <footer>Copyright &copy; 2022 Marife Dela Torre</footer>
   </body>
 </html>
