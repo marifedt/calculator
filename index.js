@@ -12,6 +12,7 @@ let num1 = "",
   num2 = "";
 let decimalPressed = false;
 let operatorPressed = false;
+let equalsPressed = false;
 
 //Functions
 const add = (a, b) => a + b;
@@ -35,6 +36,26 @@ function operate(num1, num2, operator) {
   }
 }
 
+function equate() {
+  if (num2 === "") return;
+  let res = operate(num1, num2, op);
+  if (res === "ERR") {
+    displayCurrent("Error");
+    reset();
+  } else {
+    res = Math.round((res + Number.EPSILON) * 100) / 100;
+    displayCurrent(res);
+    if (!equalsPressed) {
+      displayPrevious(`${res} ${op}`);
+      num1 = res;
+      num2 = "";
+    } else {
+      displayPrevious(`${num1} ${op} ${num2} =`);
+      reset();
+    }
+  }
+}
+
 function reset() {
   op = "";
   num1 = "";
@@ -54,14 +75,10 @@ function insert(e) {
     if (num1.length > MAX_CHAR_LENGTH) return;
     num1 += e.textContent;
     displayCurrent(num1);
-    console.log(num1);
-    console.log(e);
   } else {
     if (num2.length > MAX_CHAR_LENGTH) return;
-    console.log(e);
     num2 += e.textContent;
-    displayCurrent(`${num1} ${op} ${num2}`);
-    console.log(num2);
+    displayCurrent(`${num2}`);
   }
 }
 
@@ -78,34 +95,37 @@ decimal.addEventListener("click", () => {
 });
 
 numbers.forEach((number) => {
-  number.addEventListener("click", () => insert(number));
+  number.addEventListener("click", () => {
+    if (equalsPressed) {
+      equalsPressed = false;
+      displayPrevious("");
+    }
+    insert(number);
+  });
 });
 
-// Needs to fix call to operate when another operator is pressed (just like equals)
 operators.forEach((operator) => {
   operator.addEventListener("click", () => {
+    if (equalsPressed) {
+      equalsPressed = false;
+      num1 = currentDisplay.textContent;
+    }
     if (num1 === "") return;
     op = operator.textContent;
     decimalPressed = false;
     operatorPressed = true;
-    displayCurrent(`${num1}`);
-    displayPrevious(`${num1} ${op} `);
+    if (num2 !== "") {
+      equate();
+    } else {
+      displayCurrent(`${num1}`);
+      displayPrevious(`${num1} ${op} `);
+    }
   });
 });
 
 equals.addEventListener("click", () => {
-  if (num2 === "") return;
-  let res = operate(num1, num2, op);
-  displayPrevious(`${num1} ${op} ${num2} = `);
-  if (res === "ERR") {
-    displayCurrent("Error");
-    reset();
-  } else {
-    res = Math.round((res + Number.EPSILON) * 100) / 100;
-    reset();
-    displayCurrent(res);
-    num1 = res;
-  }
+  equalsPressed = true;
+  equate();
 });
 
 clear.addEventListener("click", () => {
