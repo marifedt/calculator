@@ -6,6 +6,7 @@ const operators = document.querySelectorAll(".operator");
 const decimal = document.querySelector("#btnDec");
 const equals = document.querySelector("#btnEqual");
 const clear = document.querySelector("#btnClear");
+const backspace = document.querySelector("#btnBS");
 
 let op = "";
 let num1 = "",
@@ -37,7 +38,6 @@ function operate(num1, num2, operator) {
 }
 
 function equate() {
-  if (num2 === "") return;
   let res = operate(num1, num2, op);
   if (res === "ERR") {
     displayCurrent("Error");
@@ -124,6 +124,7 @@ operators.forEach((operator) => {
 });
 
 equals.addEventListener("click", () => {
+  if (num2 === "") return;
   equalsPressed = true;
   equate();
 });
@@ -133,4 +134,16 @@ clear.addEventListener("click", () => {
   displayPrevious("");
   decimalPressed = false;
   reset();
+});
+
+backspace.addEventListener("click", () => {
+  if (!operatorPressed) {
+    if (num1 === "") return;
+    num1 = num1.slice(0, num1.length - 1);
+    displayCurrent(num1);
+  } else {
+    if (num2 === "") return;
+    num2 = num2.slice(0, num2.length - 1);
+    displayCurrent(num2);
+  }
 });
