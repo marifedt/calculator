@@ -50,13 +50,14 @@ function displayPrevious(text) {
 }
 
 function insert(e) {
-  if (num1.length > MAX_CHAR_LENGTH || num2.length > MAX_CHAR_LENGTH) return;
   if (!operatorPressed) {
+    if (num1.length > MAX_CHAR_LENGTH) return;
     num1 += e.textContent;
     displayCurrent(num1);
     console.log(num1);
     console.log(e);
   } else {
+    if (num2.length > MAX_CHAR_LENGTH) return;
     console.log(e);
     num2 += e.textContent;
     displayCurrent(`${num1} ${op} ${num2}`);
@@ -65,11 +66,14 @@ function insert(e) {
 }
 
 decimal.addEventListener("click", () => {
-  if (num1 !== "" || num2 !== "") {
-    if (!decimalPressed) {
-      decimalPressed = true;
-      insert(decimal);
-    }
+  if (!operatorPressed) {
+    if (num1 === "") return;
+  } else {
+    if (num2 === "") return;
+  }
+  if (!decimalPressed) {
+    decimalPressed = true;
+    insert(decimal);
   }
 });
 
